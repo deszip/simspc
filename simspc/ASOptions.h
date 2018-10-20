@@ -14,7 +14,7 @@
 
 - (BOOL)needHelp;
 - (BOOL)needVersion;
-- (BOOL)shouldPrintStats;
-- (NSURL *)inputSessionFileURL;
+- (BOOL)mount;
+- (BOOL)unmount;
 
 @end

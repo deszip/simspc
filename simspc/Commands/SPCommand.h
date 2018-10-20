@@ -12,10 +12,10 @@
 @protocol SPCommand <NSObject>
 
 @required
-@property (copy, nonatomic) NSString *launchPath
-@property (copy, nonatomic) NSArray <NSString *> *arguments
+@property (copy, nonatomic) NSString *launchPath;
+@property (copy, nonatomic) NSArray <NSString *> *arguments;
 
-- (NSString *)handleResponse:(NSString *)response;
+- (id)handleResponse:(NSString *)response;
 
 @end
 

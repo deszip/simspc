@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SPSimListCommand : NSObject <SPCommand>
 
-
+@property (copy, nonatomic) NSString *launchPath;
+@property (copy, nonatomic) NSArray <NSString *> *arguments;
 
 @end
 

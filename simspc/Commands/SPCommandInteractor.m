@@ -17,22 +17,16 @@
 
 @implementation SPCommandInteractor
 
-- (instancetype)init {
-    if (self = [super init]) {
-        _task = [NSTask new];
-        _pipe = [NSPipe pipe];
-    }
-    
-    return self;
-}
+- (id)launch:(id <SPCommand>)command {
+    NSPipe *pipe = [NSPipe pipe];
+    NSTask *task = [NSTask new];
+    task.launchPath = [command launchPath];
+    task.arguments = [command arguments];
+    task.standardOutput = pipe;
+    [task launch];
+    [task waitUntilExit];
 
-- (NSString *)launch:(id <SPCommand>)command {
-    self.task.launchPath = command.launchPath;
-    self.task.arguments = command.arguments;
-    self.task.standardOutput = self.pipe;
-    [self.task launch];
-
-    NSFileHandle *outputHandle = self.pipe.fileHandleForReading;
+    NSFileHandle *outputHandle = pipe.fileHandleForReading;
 
     NSString *rawResponse = [[NSString alloc] initWithData:outputHandle.readDataToEndOfFile encoding:NSUTF8StringEncoding];
     NSString *parsedResponse = [command handleResponse:rawResponse];

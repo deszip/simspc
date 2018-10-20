@@ -19,7 +19,7 @@
     return self;
 }
 
-- (NSString *)handleResponse:(NSString *)response {
+- (NSArray <NSString *> *)handleResponse:(NSString *)response {
     NSError *serializationError = nil;
     NSDictionary *list = [NSJSONSerialization JSONObjectWithData:[response dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&serializationError];
     if (!list) {
@@ -27,9 +27,17 @@
         return nil;
     }
     
+    NSDictionary *devcices = list[@"devices"];
+    __block NSMutableArray *bootedUDIDs = [NSMutableArray array];
+    [devcices enumerateKeysAndObjectsUsingBlock:^(NSString *runtime, NSArray *simulators, BOOL *stop) {
+        [simulators enumerateObjectsUsingBlock:^(NSDictionary *simulator, NSUInteger idx, BOOL *stop) {
+            if ([simulator[@"state"] isEqualToString:@"Booted"]) {
+                [bootedUDIDs addObject:simulator[@"udid"]];
+            }
+        }];
+    }];
     
-    
-    return response;
+    return [bootedUDIDs copy];
 }
 
 @end

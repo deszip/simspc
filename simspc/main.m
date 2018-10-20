@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 #import "ASOptions.h"
+#import "SPCommandInteractor.h"
+#import "SPSimListCommand.h"
+#import "SPHdiutilCommand.h"
 
 /*
  1
@@ -35,9 +38,44 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
+        ASOptions *options = [[ASOptions alloc] initWithArguments:[[NSProcessInfo processInfo] arguments]];
         
+        if ([options needHelp]) {
+            // show help...
+            return EXIT_SUCCESS;
+        }
         
+        if ([options needVersion]) {
+            NSLog(@"0.0.1");
+            return EXIT_SUCCESS;
+        }
         
+        SPCommandInteractor *interactor = [SPCommandInteractor new];
+        NSArray *simulators = [interactor launch:[SPSimListCommand new]];
+        NSLog(@"Booted simulators: %@", simulators);
+        
+        if (simulators.count == 0) {
+            return EXIT_FAILURE;
+        }
+        
+        if ([options mount]) {
+            [interactor launch:[SPHdiutilCommand createImage]];
+            NSString *mountPoint = [NSString stringWithFormat:@"%@/Library/Developer/CoreSimulator/Devices/%@/data/Containers/Data/Application/foo", NSHomeDirectory(), simulators[0]];
+            [interactor launch:[SPHdiutilCommand attachImage:mountPoint]];
+            
+            return EXIT_SUCCESS;
+        }
+        
+        if ([options unmount]) {
+            NSArray *mountedEntries = [interactor launch:[SPHdiutilCommand info]];
+            NSLog(@"Mounted entries: %@", mountedEntries);
+            
+            [mountedEntries enumerateObjectsUsingBlock:^(NSString *entry, NSUInteger idx, BOOL *stop) {
+                [interactor launch:[SPHdiutilCommand detach:entry]];
+            }];
+            
+            return EXIT_SUCCESS;
+        }
     }
     
     return EXIT_SUCCESS;

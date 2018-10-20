@@ -9,7 +9,6 @@
 #import "ASOptions.h"
 
 #import "XPMArguments.h"
-#import "NSString+backSlashes.h"
 
 typedef NS_ENUM(NSUInteger, ASOptionIndex) {
     ASOptionIndexHelp = 0,
@@ -40,14 +39,15 @@ typedef NS_ENUM(NSUInteger, ASOptionIndex) {
 - (void)buildSignatures {
     XPMArgumentSignature *help = [XPMArgumentSignature argumentSignatureWithFormat:@"[-h --help]"];
     XPMArgumentSignature *version = [XPMArgumentSignature argumentSignatureWithFormat:@"[-v --version]"];
-    XPMArgumentSignature *inputSessionURL = [XPMArgumentSignature argumentSignatureWithFormat:@"[-i --input]={1,1}"];
-    XPMArgumentSignature *stats = [XPMArgumentSignature argumentSignatureWithFormat:@"[-s --stats]"];
+    XPMArgumentSignature *mount = [XPMArgumentSignature argumentSignatureWithFormat:@"[-m --mount]"];
+    XPMArgumentSignature *unmount = [XPMArgumentSignature argumentSignatureWithFormat:@"[-u --unmount]"];
     
     NSMutableArray *signatures = [NSMutableArray array];
     signatures[ASOptionIndexHelp] = help;
     signatures[ASOptionIndexVersion] = version;
-    signatures[ASOptionIndexInputSessionURL] = inputSessionURL;
-    signatures[ASOptionIndexSessionStats] = stats;
+    signatures[ASOptionIndexMount] = mount;
+    signatures[ASOptionIndexUnmount] = unmount;
+    
     _signatures = [signatures copy];
 }
 
@@ -59,19 +59,12 @@ typedef NS_ENUM(NSUInteger, ASOptionIndex) {
     return [self.package booleanValueForSignature:self.signatures[ASOptionIndexVersion]];
 }
 
-- (BOOL)shouldPrintStats {
-    return [self.package booleanValueForSignature:self.signatures[ASOptionIndexSessionStats]];
+- (BOOL)mount {
+    return [self.package booleanValueForSignature:self.signatures[ASOptionIndexMount]];
 }
 
-- (NSURL *)inputSessionFileURL {
-    NSString *sessionPath = [[self.package firstObjectForSignature:self.signatures[ASOptionIndexInputSessionURL]] stringByExpandingTildeInPath];
-    if (!sessionPath) {
-        return nil;
-    }
-    
-    NSURL *sessionURL = [NSURL fileURLWithPath:sessionPath];
-    
-    return sessionURL;
+- (BOOL)unmount {
+    return [self.package booleanValueForSignature:self.signatures[ASOptionIndexUnmount]];
 }
 
 @end

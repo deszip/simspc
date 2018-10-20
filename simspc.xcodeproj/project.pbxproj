@@ -24,6 +24,7 @@
 		0E6DF7032177765F004DAAEB /* ASOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DF7022177765F004DAAEB /* ASOptions.m */; };
 		0E6DF70621777B25004DAAEB /* SPCommandInteractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DF70521777B24004DAAEB /* SPCommandInteractor.m */; };
 		0E6DF70A21777E1C004DAAEB /* SPSimListCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DF70921777E1C004DAAEB /* SPSimListCommand.m */; };
+		0ECB2A60217B9CA800ADB62A /* SPHdiutilCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB2A5F217B9CA800ADB62A /* SPHdiutilCommand.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -78,6 +79,8 @@
 		0E6DF70821777E1C004DAAEB /* SPSimListCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPSimListCommand.h; sourceTree = "<group>"; };
 		0E6DF70921777E1C004DAAEB /* SPSimListCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPSimListCommand.m; sourceTree = "<group>"; };
 		0E6DF70B21777EE6004DAAEB /* SPCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPCommand.h; sourceTree = "<group>"; };
+		0ECB2A5E217B9CA800ADB62A /* SPHdiutilCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPHdiutilCommand.h; sourceTree = "<group>"; };
+		0ECB2A5F217B9CA800ADB62A /* SPHdiutilCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPHdiutilCommand.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,10 +113,10 @@
 		0E5B7934217711F900DEC01F /* simspc */ = {
 			isa = PBXGroup;
 			children = (
-				0E6DF70721777DB7004DAAEB /* External */,
 				0E5B7935217711F900DEC01F /* main.m */,
 				0E6DF7012177765F004DAAEB /* ASOptions.h */,
 				0E6DF7022177765F004DAAEB /* ASOptions.m */,
+				0E6DF70721777DB7004DAAEB /* Commands */,
 				0E6DF6D421777621004DAAEB /* Dependencies */,
 			);
 			path = simspc;
@@ -164,7 +167,7 @@
 			path = ArgumentParser;
 			sourceTree = "<group>";
 		};
-		0E6DF70721777DB7004DAAEB /* External */ = {
+		0E6DF70721777DB7004DAAEB /* Commands */ = {
 			isa = PBXGroup;
 			children = (
 				0E6DF70421777B24004DAAEB /* SPCommandInteractor.h */,
@@ -172,8 +175,10 @@
 				0E6DF70821777E1C004DAAEB /* SPSimListCommand.h */,
 				0E6DF70921777E1C004DAAEB /* SPSimListCommand.m */,
 				0E6DF70B21777EE6004DAAEB /* SPCommand.h */,
+				0ECB2A5E217B9CA800ADB62A /* SPHdiutilCommand.h */,
+				0ECB2A5F217B9CA800ADB62A /* SPHdiutilCommand.m */,
 			);
-			path = External;
+			path = Commands;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,6 +243,7 @@
 				0E6DF6FE21777633004DAAEB /* NSString+Indenter.m in Sources */,
 				0E6DF6F721777633004DAAEB /* XPMArgsKonstants.m in Sources */,
 				0E6DF6FF21777633004DAAEB /* NSArray+XPMArgumentsNormalizer.m in Sources */,
+				0ECB2A60217B9CA800ADB62A /* SPHdiutilCommand.m in Sources */,
 				0E6DF6FC21777633004DAAEB /* XPMArgumentPackage.m in Sources */,
 				0E5B7936217711F900DEC01F /* main.m in Sources */,
 				0E6DF6FB21777633004DAAEB /* NSScanner+EscapedScanning.m in Sources */,

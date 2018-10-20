@@ -12,6 +12,6 @@
 
 @interface SPCommandInteractor : NSObject
 
-- (NSString *)launch:(id <SPCommand>)command;
+- (id)launch:(id <SPCommand>)command;
 
 @end
