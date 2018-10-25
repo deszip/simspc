@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E39B35A217F5516005D03E6 /* ASEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E39B359217F5516005D03E6 /* ASEnvironment.m */; };
 		0E5B7936217711F900DEC01F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E5B7935217711F900DEC01F /* main.m */; };
 		0E6DF6F421777633004DAAEB /* XPMValuedArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DF6DB21777633004DAAEB /* XPMValuedArgument.m */; };
 		0E6DF6F521777633004DAAEB /* NSProcessInfo+XPMArgumentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E6DF6DE21777633004DAAEB /* NSProcessInfo+XPMArgumentParser.m */; };
@@ -40,6 +41,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0E39B358217F5516005D03E6 /* ASEnvironment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ASEnvironment.h; sourceTree = "<group>"; };
+		0E39B359217F5516005D03E6 /* ASEnvironment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ASEnvironment.m; sourceTree = "<group>"; };
 		0E5B7932217711F900DEC01F /* simspc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = simspc; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E5B7935217711F900DEC01F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0E6DF6D621777633004DAAEB /* XPMArgumentPackage_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPMArgumentPackage_Private.h; sourceTree = "<group>"; };
@@ -94,6 +97,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E39B357217F54F3005D03E6 /* Environment */ = {
+			isa = PBXGroup;
+			children = (
+				0E6DF7012177765F004DAAEB /* ASOptions.h */,
+				0E6DF7022177765F004DAAEB /* ASOptions.m */,
+				0E39B358217F5516005D03E6 /* ASEnvironment.h */,
+				0E39B359217F5516005D03E6 /* ASEnvironment.m */,
+			);
+			path = Environment;
+			sourceTree = "<group>";
+		};
 		0E5B7929217711F900DEC01F = {
 			isa = PBXGroup;
 			children = (
@@ -114,8 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				0E5B7935217711F900DEC01F /* main.m */,
-				0E6DF7012177765F004DAAEB /* ASOptions.h */,
-				0E6DF7022177765F004DAAEB /* ASOptions.m */,
+				0E39B357217F54F3005D03E6 /* Environment */,
 				0E6DF70721777DB7004DAAEB /* Commands */,
 				0E6DF6D421777621004DAAEB /* Dependencies */,
 			);
@@ -250,6 +263,7 @@
 				0E6DF6F821777633004DAAEB /* XPMArgumentSignature.m in Sources */,
 				0E6DF70A21777E1C004DAAEB /* SPSimListCommand.m in Sources */,
 				0E6DF70021777633004DAAEB /* NSDictionary+RubyDescription.m in Sources */,
+				0E39B35A217F5516005D03E6 /* ASEnvironment.m in Sources */,
 				0E6DF6F421777633004DAAEB /* XPMValuedArgument.m in Sources */,
 				0E6DF7032177765F004DAAEB /* ASOptions.m in Sources */,
 				0E6DF6F921777633004DAAEB /* XPMArguments_Coalescer_Internal.m in Sources */,
