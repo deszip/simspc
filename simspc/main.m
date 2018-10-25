@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "ASEnvironment.h"
 #import "ASOptions.h"
 #import "SPCommandInteractor.h"
 #import "SPSimListCommand.h"
@@ -24,7 +25,7 @@
     optionally get size and FS from arguments
  
  3
- hdiutil attach /tmp/1meg.dmg -mountpoint /Users/zardoz/Library/Developer/CoreSimulator/Devices/5E973C4A-8823-4A5F-9478-45263B9EBA42/data/Containers/Data/Application/foo
+ hdiutil attach /tmp/1meg.dmg -mountpoint /Users/[username]/Library/Developer/CoreSimulator/Devices/5E973C4A-8823-4A5F-9478-45263B9EBA42/data/Containers/Data/Application/foo
     use simulator UUID to build mount point path
  
  4
@@ -39,22 +40,23 @@
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         ASOptions *options = [[ASOptions alloc] initWithArguments:[[NSProcessInfo processInfo] arguments]];
+        ASEnvironment *environment = [ASEnvironment new];
         
         if ([options needHelp]) {
-            // show help...
+            [environment printHelp:options];
             return EXIT_SUCCESS;
         }
         
         if ([options needVersion]) {
-            NSLog(@"0.0.1");
+            [environment printVersion];
             return EXIT_SUCCESS;
         }
         
         SPCommandInteractor *interactor = [SPCommandInteractor new];
         NSArray *simulators = [interactor launch:[SPSimListCommand new]];
-        NSLog(@"Booted simulators: %@", simulators);
         
         if (simulators.count == 0) {
+            [environment toStderr:@"No booted simulators found, exiting...\n"];
             return EXIT_FAILURE;
         }
         
@@ -63,16 +65,19 @@ int main(int argc, const char * argv[]) {
             NSString *mountPoint = [NSString stringWithFormat:@"%@/Library/Developer/CoreSimulator/Devices/%@/data/Containers/Data/Application/foo", NSHomeDirectory(), simulators[0]];
             [interactor launch:[SPHdiutilCommand attachImage:mountPoint]];
             
+            [environment toStdout:@"Image mounted\n"];
+            
             return EXIT_SUCCESS;
         }
         
         if ([options unmount]) {
             NSArray *mountedEntries = [interactor launch:[SPHdiutilCommand info]];
-            NSLog(@"Mounted entries: %@", mountedEntries);
             
             [mountedEntries enumerateObjectsUsingBlock:^(NSString *entry, NSUInteger idx, BOOL *stop) {
                 [interactor launch:[SPHdiutilCommand detach:entry]];
             }];
+            
+            [environment toStdout:@"Image unmounted\n"];
             
             return EXIT_SUCCESS;
         }
